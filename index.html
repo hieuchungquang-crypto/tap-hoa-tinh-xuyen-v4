@@ -8,6 +8,14 @@
 .receipt-page{position:relative;width:148mm;min-height:210mm;margin:0 auto;padding:9mm 8mm 13mm;background:white;border:1px solid #444;color:#111;font-family:Arial,sans-serif;font-size:10pt;box-shadow:0 1px 6px #0002;overflow-wrap:anywhere}
 .receipt-page h2{font-family:Georgia,'Times New Roman',serif;font-size:23pt;text-align:center;margin:6mm 0 5mm}
 .r-brand{display:flex;align-items:center;gap:4mm;min-height:28mm}.r-mark{width:34%;border-right:1px solid #111;text-align:center;font-size:13pt;font-weight:900;font-style:italic;line-height:1.05;padding-right:3mm}.r-cart{font-size:26pt;font-style:normal;line-height:1.1}.r-shop{flex:1;text-align:center;font-size:10pt;line-height:1.75}.r-shop strong{font-size:17pt;display:block;white-space:nowrap}.r-shop .r-dots{font-size:9pt}.r-rule{border-top:1.5px solid #111;margin-top:4mm}.r-continued{text-align:center;border-bottom:1px solid #111;padding-bottom:4mm;line-height:1.5}.r-continued b{font-size:16pt}.r-meta{font-size:10pt;line-height:1.65;margin:4mm 0 5mm}.r-meta>div:first-child{display:flex;justify-content:space-between;gap:3mm}.r-meta b{font-weight:600}.r-table{table-layout:fixed;width:100%;border-collapse:collapse;font-size:9pt}.r-table th,.r-table td{border:1px solid #333;padding:2.5mm 1mm;vertical-align:top;overflow-wrap:anywhere}.r-table th{background:#eee;font-weight:700;text-align:center}.r-center{text-align:center}.r-right{text-align:right}.r-totals{border:1px solid #333;border-top:0;padding:2mm 3mm;font-size:10pt}.r-totals>div{display:flex;justify-content:space-between;gap:4mm;padding:1mm 0}.r-totals .r-grand{border-top:1px solid #333;font-weight:700;font-size:12pt;padding-top:2mm}.r-notes{margin-top:4mm;font-size:9pt}.r-sign{display:flex;justify-content:space-between;text-align:center;margin-top:5mm;font-size:10pt}.r-sign>div{width:45%}.r-sign i{display:block;font-size:9pt;margin-top:1mm}.r-thanks{text-align:center;font-style:italic;font-size:10pt;margin-top:19mm}.r-next{margin-top:5mm;font-size:9pt;font-style:italic;text-align:center}.r-page-number{position:absolute;bottom:5mm;right:8mm;font-size:9pt;font-weight:600}
+/* V4.5: dia chi mot dong, can giua, co du cho tren giay A5. */
+.r-brand{gap:2mm}
+.r-mark{width:25%;flex:0 0 25%;font-size:10pt;padding-right:2mm}
+.r-mark .r-cart{font-size:23pt}
+.r-shop{min-width:0;flex:1;line-height:1.5}
+.r-shop strong{font-size:14pt}
+.r-shop .r-address{font-size:7pt;letter-spacing:-.18px;white-space:nowrap;overflow:visible;line-height:1.65}
+.r-shop .r-phone{font-size:9pt;line-height:1.6}
 /* V4.2: watermark trung tam bang hang, cung bieu tuong va ten cua hang voi logo dau trang. */
 .r-table-wrap{position:relative;isolation:isolate;overflow:hidden}
 .r-watermark{position:absolute;inset:0;overflow:hidden;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;pointer-events:none;z-index:0;opacity:.10;color:#111;font-family:Arial,sans-serif;font-weight:900;font-style:italic;line-height:1.05;user-select:none}
@@ -30,6 +38,12 @@
  #receipt .r-table tr{break-inside:avoid!important;page-break-inside:avoid!important}
 }
 .prod-tile{position:relative;min-width:0}.prod-tile .prod{width:100%;height:100%;padding-right:34px}.favorite{position:absolute;right:6px;top:5px;z-index:2;min-height:31px;padding:3px 8px;background:#fff;color:#b17900;border:1px solid #d9e7db;font-size:21px}.favorite:hover{background:#fff6cf}.price-preview{display:block;font-size:12px;color:#62766a;margin-top:3px}
+
+/* V4.5: Can giua thong tin cua hang, xuong dong dia chi co chu dich. */
+.r-shop{min-width:0;text-align:center;line-height:1.4;font-size:9pt}
+.r-shop strong{font-size:15pt;line-height:1.2;margin-bottom:2.5mm;white-space:nowrap}
+.r-shop .r-address{font-size:9pt;line-height:1.45;white-space:normal;overflow-wrap:normal}
+.r-shop .r-phone{font-size:9pt;margin-top:1.5mm;line-height:1.3}
 </style></head><body>
 <header><h1>🛒 TẠP HÓA TÍNH XUYÊN</h1><small>V4.5 · Bán hàng nhanh · Không cần đăng nhập · Dữ liệu lưu trên thiết bị</small></header>
 <main class="wrap">
@@ -97,7 +111,7 @@ function renderReceipt(inv){
   const first=idx===0,last=idx===pages.length-1;
   const rows=part.map((x,j)=>`<tr><td class="r-center">${offset+j+1}</td><td>${esc(x.name)}</td><td class="r-center">${esc(x.unit)}</td><td class="r-right">${Number(x.qty).toLocaleString('vi-VN',{maximumFractionDigits:3})}</td><td class="r-right">${Number(x.price).toLocaleString('vi-VN')}</td><td class="r-right">${Number(x.total).toLocaleString('vi-VN')}</td></tr>`).join('');
   offset+=part.length;
-  const heading=first?`<div class="r-brand"><div class="r-mark"><div class="r-cart">🛒</div><b>TẠP HÓA<br>TÍNH XUYÊN</b></div><div class="r-shop"><strong>TẠP HÓA TÍNH XUYÊN</strong><div>Địa chỉ: Đường Bùi Thị Xuân, Chợ Lấp Vò, Xã Lấp Vò, Đồng Tháp</div><div>Điện thoại: 0989 079 870</div></div></div><div class="r-rule"></div><h2>HÓA ĐƠN BÁN LẺ</h2>`:`<div class="r-continued"><b>TẠP HÓA TÍNH XUYÊN</b><div>HÓA ĐƠN BÁN LẺ (TIẾP)</div></div>`;
+  const heading=first?`<div class="r-brand"><div class="r-mark"><div class="r-cart">🛒</div><b>TẠP HÓA<br>TÍNH XUYÊN</b></div><div class="r-shop"><strong>TẠP HÓA TÍNH XUYÊN</strong><div class="r-address">Đường Bùi Thị Xuân, Chợ Lấp Vò, Lấp Vò, Đồng Tháp</div><div class="r-phone">ĐT: 0989 079 870</div></div></div><div class="r-rule"></div><h2>HÓA ĐƠN BÁN LẺ</h2>`:`<div class="r-continued"><b>TẠP HÓA TÍNH XUYÊN</b><div>HÓA ĐƠN BÁN LẺ (TIẾP)</div></div>`;
   const summary=last?`<div class="r-totals"><div><span>Tạm tính:</span><b>${money(inv.subtotal)}</b></div>${Number(inv.discount)>0?`<div><span>Giảm giá:</span><b>−${money(inv.discount)}</b></div>`:''}<div class="r-grand"><span>TỔNG THANH TOÁN:</span><b>${money(inv.payable)}</b></div></div><div class="r-notes">Ghi chú: ........................................................................</div><div class="r-sign"><div><b>Người mua hàng</b><i>(Ký, ghi rõ họ tên)</i></div><div><b>Người bán hàng</b><i>(Ký, ghi rõ họ tên)</i></div></div><div class="r-thanks">Cảm ơn quý khách và hẹn gặp lại!</div>`:`<div class="r-next">Còn tiếp trang sau...</div>`;
   return `<section class="receipt-page">${heading}<div class="r-meta"><div><span>Khách hàng: <b>${esc(inv.customer||'Khách lẻ')}</b></span><span>Mã hóa đơn: <b>${esc(inv.id||'BẢN XEM TRƯỚC')}</b></span></div><div>Ngày: ${esc(stamp)}</div></div><div class="r-table-wrap"><div class="r-watermark" aria-hidden="true"><div class="r-cart">🛒</div><div class="r-watermark-name">TẠP HÓA<br>TÍNH XUYÊN</div></div><table class="r-table"><colgroup><col style="width:7%"><col style="width:33%"><col style="width:10%"><col style="width:10%"><col style="width:19%"><col style="width:21%"></colgroup><thead><tr><th>STT</th><th>Tên hàng hóa</th><th>ĐVT</th><th>SL</th><th>Đơn giá</th><th>Thành tiền</th></tr></thead><tbody>${rows||'<tr><td colspan="6">Chưa có sản phẩm</td></tr>'}</tbody></table></div>${summary}${multi?`<div class="r-page-number">Trang ${idx+1}/${pages.length}</div>`:''}</section>`;
  }).join('');
