@@ -29,6 +29,22 @@
  #receipt .r-table td,#receipt .r-table th{font-size:9pt!important;padding:2.5mm 1mm!important}
  #receipt .r-table tr{break-inside:avoid!important;page-break-inside:avoid!important}
 }
+
+/* V4.4.1: Chi in khu vuc hoa don, tranh cac section an chiem trang giay. */
+@media print {
+  @page { size: A5 portrait; margin: 0; }
+  html, body { width: 148mm !important; margin: 0 !important; padding: 0 !important; height: auto !important; overflow: visible !important; }
+  body > header, body > main > :not(#viewSales) { display: none !important; }
+  body > main, #viewSales { display: block !important; width: 148mm !important; max-width: 148mm !important; margin: 0 !important; padding: 0 !important; border: 0 !important; background: white !important; box-shadow: none !important; }
+  #viewSales > :not(.split) { display: none !important; }
+  #viewSales > .split { display: block !important; width: 148mm !important; margin: 0 !important; padding: 0 !important; }
+  #viewSales > .split > :first-child { display: none !important; }
+  #viewSales > .split > :last-child { display: block !important; width: 148mm !important; margin: 0 !important; padding: 0 !important; }
+  #viewSales > .split > :last-child > :not(#receipt) { display: none !important; }
+  #receipt { position: static !important; display: block !important; width: 148mm !important; height: auto !important; min-height: 0 !important; margin: 0 !important; padding: 0 !important; overflow: visible !important; }
+  #receipt .receipt-page { position: relative !important; display: block !important; width: 148mm !important; height: 209mm !important; min-height: 209mm !important; max-height: 209mm !important; margin: 0 !important; padding: 9mm 8mm 13mm !important; overflow: hidden !important; break-after: page !important; page-break-after: always !important; }
+  #receipt .receipt-page:last-child { break-after: auto !important; page-break-after: auto !important; }
+}
 </style></head><body>
 <header><h1>🛒 TẠP HÓA TÍNH XUYÊN</h1><small>V4 · Bán hàng nhanh · Không cần đăng nhập · Dữ liệu lưu trên thiết bị</small></header>
 <main class="wrap">
